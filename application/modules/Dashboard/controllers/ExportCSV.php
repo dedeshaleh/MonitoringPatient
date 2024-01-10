@@ -13,11 +13,10 @@
  * @filesource
  *
  */
-
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
-
+use phpseclib\Net\SFTP;
 
 // class Webcontrol extends BackendController
 class ExportCSV extends MY_Controller
@@ -95,7 +94,36 @@ class ExportCSV extends MY_Controller
         // $writer->save($outputFile);
         $outputFile = '\\\\10.10.110.116\\Backoffice\\DataCSV\\Data CSV '.date("Y-m-d His").'.csv'; // FCPATH mengambil path ke direktori kerja CodeIgniter
         $writer->save($outputFile);
+        $GetFile = '\\\\10.10.110.116\\Backoffice\\DataCSV\\Data CSV '.date("Y-m-d His").'.csv'; // FCPATH mengambil path ke direktori kerja CodeIgniter
 
-        echo "File CSV berhasil dibuat: $outputFile";
+        $sftpConfig = array(
+            'hostname' => '172.188.64.207',
+            'port' => 22,
+            'username' => 'bethsftp',
+            'password' => 'B3thsftp!!',
+        );
+
+        $sftp = new SFTP($sftpConfig['hostname'], $sftpConfig['port']);
+        
+        if (!$sftp->login($sftpConfig['username'], $sftpConfig['password'])) {
+            die('Login Failed');
+        }
+
+        // Path di server SFTP tempat Anda ingin menyimpan file
+        // $remotePath = '/path/to/remote/directory/';
+
+        // Path lokal ke file yang akan diunggah
+        $remotePath = '\\DEV\\IN\\BHI\\ReferralCommission\\Data CSV '.date("Y-m-d His").'.csv'; // FCPATH mengambil path ke direktori kerja CodeIgniter
+
+        // Nama file di server SFTP (bisa sama atau berbeda dengan nama lokal)
+
+        // Mencoba mengunggah file
+        if ($sftp->put($remotePath, $GetFile, SFTP::SOURCE_LOCAL_FILE)) {
+            echo 'File berhasil diunggah.';
+        } else {
+            echo 'Gagal mengunggah file.';
+        }
+
+        echo "File CSV berhasil dibuat: $remotePath";
     }
 }
