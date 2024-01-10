@@ -3,7 +3,7 @@
         'name' => 'codeigniter/framework',
         'pretty_version' => 'dev-MonitoringPatient',
         'version' => 'dev-MonitoringPatient',
-        'reference' => 'c53f92c37e856decd2f63f73e6bb60c1f0df1f1c',
+        'reference' => 'ee7c76b022f01affc15526f423a0215eb93a17d5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'codeigniter/framework' => array(
             'pretty_version' => 'dev-MonitoringPatient',
             'version' => 'dev-MonitoringPatient',
-            'reference' => 'c53f92c37e856decd2f63f73e6bb60c1f0df1f1c',
+            'reference' => 'ee7c76b022f01affc15526f423a0215eb93a17d5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
