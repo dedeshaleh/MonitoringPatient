@@ -31,6 +31,13 @@ if (!empty($_SERVER['HTTPS'])) {
 	$config['base_url'] = "https://" . $domain;
 }
 
+// Credential Akses SFTP
+$config['username'] = 'bethsftp';
+$config['password'] = 'B3thsftp!!';
+$config['hostname'] = '172.188.64.207';
+$config['port'] = 22;
+
+
 /*
 |--------------------------------------------------------------------------
 | Index File
